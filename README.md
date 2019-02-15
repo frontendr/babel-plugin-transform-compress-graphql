@@ -1,6 +1,6 @@
 # babel-plugin-transform-compress-graphql
 
-> Remove unnecessary React propTypes from the production build.
+> Removes unnecessary white space from graphql queries.
 
 [![npm version](https://img.shields.io/npm/v/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
 [![npm downloads](https://img.shields.io/npm/dm/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
