@@ -24,7 +24,7 @@
     "prettier": "prettier --write ./**/*.js",
     "test": "eslint . && npm run build"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
