@@ -1,6 +1,6 @@
 # babel-plugin-transform-compress-graphql
 
-> Removes unnecessary white space from graphql queries.
+> Removes unnecessary white space from GraphQL queries.
 
 [![npm version](https://img.shields.io/npm/v/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
 [![npm downloads](https://img.shields.io/npm/dm/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
@@ -17,13 +17,13 @@ npm install --save-dev babel-plugin-transform-compress-graphql
 
 ## The problem solved
 
-Compress GraphQL queries by simply tagging them with the `graphql` template tag.
+Compress GraphQL queries by simply tagging them with the `gql` template tag.
 
 ## Example
 
 **In**
 ```js
-const query = graphql`
+const query = gql`
   people(uuid:"${uuid}") {
     uuid,
     fullName,
