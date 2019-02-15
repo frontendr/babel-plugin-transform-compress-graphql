@@ -1,0 +1,38 @@
+{
+  "author": "Johan Arensman <johan@frontendr.com> (https://www.frontendr.com/)",
+  "description": "Removes unnecessary white space from graphql queries.",
+  "homepage": "https://github.com/frontendr/babel-plugin-transform-compress-graphql#readme",
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "graphql",
+    "query",
+    "compress",
+    "minification"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "babel-plugin-transform-compress-graphql",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontendr/babel-plugin-transform-compress-graphql.git"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "lint": "eslint . && echo \"eslint: no lint errors\"",
+    "prebuild": "rm -rf lib/",
+    "prettier": "prettier --write ./**/*.js"
+  },
+  "version": "0.0.1",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.13.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  }
+}
