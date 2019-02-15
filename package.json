@@ -21,9 +21,10 @@
     "build": "babel src --out-dir lib",
     "lint": "eslint . && echo \"eslint: no lint errors\"",
     "prebuild": "rm -rf lib/",
-    "prettier": "prettier --write ./**/*.js"
+    "prettier": "prettier --write ./**/*.js",
+    "test": "eslint . && npm run build"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
