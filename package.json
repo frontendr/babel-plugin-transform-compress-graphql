@@ -21,6 +21,7 @@
     "build": "babel src --out-dir lib",
     "lint": "eslint . && echo \"eslint: no lint errors\"",
     "prebuild": "rm -rf lib/",
+    "prepublish": "npm run build",
     "prettier": "prettier --write ./**/*.js",
     "test": "eslint . && npm run build"
   },
