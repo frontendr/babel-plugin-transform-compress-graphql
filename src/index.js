@@ -23,10 +23,10 @@ export default function(api) {
       },
       TaggedTemplateExpression(path, state) {
         const {tag, quasi} = path.node;
-        const {tagName = 'gql'} = state.opts;
+        const {tagName = 'gql', tagFunction = 'String.raw'} = state.opts;
 
         if (tag.name === tagName && !path.scope.hasBinding(tagName)) {
-          tag.name = 'String.raw';
+          tag.name = tagFunction;
           quasi.quasis.map(({value}) => {
             const part = compress(value.raw);
             value.raw = part;
