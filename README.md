@@ -89,6 +89,41 @@ require('babel-core').transform('code', {
 });
 ```
 
+## Plugin options
+
+Options can be passed by wrapping the plugin name in an array and adding an
+object literal as the second item in that array.
+
+For example in your **.babelrc**:
+
+```json
+{
+  "env": {
+    "production": {
+      "plugins": [
+        ["transform-compress-graphql", {
+          "tagName": "gql",
+          "tagFunction": "String.raw"
+        }]
+      ]
+    }
+  }
+}
+```
+
+The following options are available:
+
+- `tagName` - `String` with the name of the tag to search for. Defaults
+  to `"gql"`.
+- `tagFunction` - `String` with the name of the tag to replace the tag with.
+  Defaults to: `"String.raw"`.
+
+## What about existing variables named `gql`?
+
+When a template literal is found with a tag named `gql` (or with the same name
+as the `tagName` option) the scope is checked for an existing binding of that
+variable and if it exists, the tag is not replaced.
+
 ## License
 
 MIT
