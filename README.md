@@ -89,6 +89,12 @@ require('babel-core').transform('code', {
 });
 ```
 
+## What about existing variables named `gql`?
+
+When a template literal is found with a tag named `gql` the scope is checked for
+an existing binding of that variable. If a variable named `gql` exists the tag
+is not replaced.
+
 ## License
 
 MIT

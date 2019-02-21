@@ -32,4 +32,7 @@ describe('Transforming code', () => {
   it('should replace any `gql` tags with `String.raw`', () => {
     compareInputWithExpected('basic-example');
   });
+  it('should not replace any `gql` tags which have an existing binding', () => {
+    compareInputWithExpected('existing-binding');
+  });
 });
