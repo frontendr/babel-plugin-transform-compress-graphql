@@ -41,4 +41,9 @@ describe('Transforming code', () => {
       tagName: 'my_custom_compress_graphql_tag'
     });
   });
+  it('should replace using a custom tag function', () => {
+    compareInputWithExpected('overridden-tag-function', {
+      tagFunction: 'window.String.raw'
+    });
+  });
 });
