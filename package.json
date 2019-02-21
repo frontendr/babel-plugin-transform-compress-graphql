@@ -26,7 +26,7 @@
     "test": "eslint . && npm run test:unit",
     "test:unit": "mocha"
   },
-  "version": "0.0.4",
+  "version": "0.1.0",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
