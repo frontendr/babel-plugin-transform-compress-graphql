@@ -120,9 +120,9 @@ The following options are available:
 
 ## What about existing variables named `gql`?
 
-When a template literal is found with a tag named `gql` the scope is checked for
-an existing binding of that variable. If a variable named `gql` exists the tag
-is not replaced.
+When a template literal is found with a tag named `gql` (or with the same name
+as the `tagName` option) the scope is checked for an existing binding of that
+variable and if it exists, the tag is not replaced.
 
 ## License
 
