@@ -83,7 +83,7 @@ babel --plugins transform-compress-graphql script.js
 ### Via Node API
 
 ```js
-require('babel-core').transform('code', {
+require('@babel/core').transform('code', {
   plugins: [
     'transform-compress-graphql',
   ],
