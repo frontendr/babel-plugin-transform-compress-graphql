@@ -5,6 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
 [![npm downloads](https://img.shields.io/npm/dm/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
 [![Build Status](https://travis-ci.org/frontendr/babel-plugin-transform-compress-graphql.svg?branch=master)](https://travis-ci.org/frontendr/babel-plugin-transform-compress-graphql)
+[![Coverage Status](https://coveralls.io/repos/github/frontendr/babel-plugin-transform-compress-graphql/badge.svg?branch=develop)](https://coveralls.io/github/frontendr/babel-plugin-transform-compress-graphql?branch=develop)
 
 [![Dependencies](https://img.shields.io/david/frontendr/babel-plugin-transform-compress-graphql.svg)](https://david-dm.org/frontendr/babel-plugin-transform-compress-graphql)
 [![DevDependencies](https://img.shields.io/david/dev/frontendr/babel-plugin-transform-compress-graphql.svg)](https://david-dm.org/frontendr/babel-plugin-transform-compress-graphql?type=dev)
