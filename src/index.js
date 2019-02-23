@@ -25,8 +25,10 @@ export default function(api) {
         const {tag, quasi} = path.node;
         const {tagName = 'gql', tagFunction = 'String.raw'} = state.opts;
 
-        if (tag.name === tagName && !path.scope.hasBinding(tagName)) {
-          tag.name = tagFunction;
+        if (tag.name === tagName) {
+          if (!path.scope.hasBinding(tagName)) {
+            tag.name = tagFunction;
+          }
           quasi.quasis.map(({value}) => {
             const part = compress(value.raw);
             value.raw = part;
