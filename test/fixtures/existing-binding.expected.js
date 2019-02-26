@@ -12,4 +12,4 @@ function gql(parts) {
   return parts.join('');
 }
 
-const query = gql`people(uuid:"${uuid}"){uuid fullName dateOfBirth nextBirthday age relations{description type person{uuid fullName}}events{uuid name description startDate,startTime endDate,endTime}}`;
+const query = gql`people(uuid:"${uuid}"){uuid,fullName,dateOfBirth,nextBirthday,age,relations{description,type,person{uuid,fullName}}events{uuid,name,description,startDate,startTime,endDate,endTime}}`;

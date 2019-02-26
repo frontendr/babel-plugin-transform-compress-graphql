@@ -1,12 +1,5 @@
 'use strict';
-
-const compress = query =>
-  query
-    .replace(/#.*\n/g, '')
-    .replace(/[\s|,]*\n+[\s|,]*/g, ' ')
-    .replace(/\s?([:,{}()=@])\s?/g, '$1')
-    .replace(/\s([$.])/g, '$1')
-    .trim();
+import compress from 'graphql-query-compress';
 
 export default function(api) {
   let changed = [];
@@ -23,14 +16,14 @@ export default function(api) {
       },
       TaggedTemplateExpression(path, state) {
         const {tag, quasi} = path.node;
-        const {tagName = 'gql', tagFunction = 'String.raw'} = state.opts;
+        const {tagName = 'gql', tagFunction = ''} = state.opts;
 
         if (tag.name === tagName) {
           if (!path.scope.hasBinding(tagName)) {
             tag.name = tagFunction;
           }
           quasi.quasis.map(({value}) => {
-            const part = compress(value.raw);
+            const part = compress(value.raw).trim();
             value.raw = part;
             value.cooked = part;
           });

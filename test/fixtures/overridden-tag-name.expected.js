@@ -1,3 +1,3 @@
 "use strict";
 
-const query = String.raw`people{uuid fullName dateOfBirth nextBirthday}`;
+const query = `people{uuid,fullName,dateOfBirth,nextBirthday}`;

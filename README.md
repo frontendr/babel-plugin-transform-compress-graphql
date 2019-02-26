@@ -1,6 +1,7 @@
 # babel-plugin-transform-compress-graphql
 
-> Removes unnecessary white space from GraphQL queries.
+> Removes unnecessary white space from GraphQL queries using
+[`graphql-query-compress`](https://www.npmjs.com/package/graphql-query-compress).
 
 [![npm version](https://img.shields.io/npm/v/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
 [![npm downloads](https://img.shields.io/npm/dm/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
@@ -19,6 +20,7 @@ npm install --save-dev babel-plugin-transform-compress-graphql
 ## The problem solved
 
 Compress GraphQL queries by simply tagging them with the `gql` template tag.
+The tag name can be customized with an option.
 
 ## Example
 
@@ -53,7 +55,7 @@ Which is is pretty big literal right?
 
 **Out**
 ```js
-const query = String.raw`people(uuid:"${uuid}"){uuid fullName dateOfBirth nextBirthday age relations {description type person{uuid fullName}}events{uuid name description startDate startTime endDate endTime}}`
+const query = `people(uuid:"${uuid}"){uuid,fullName,dateOfBirth,nextBirthday,age,relations{description,type,person{uuid,fullName}}events{uuid,name,description,startDate,startTime,endDate,endTime}}`;
 ```
 
 Which saves quite some white space which has no use in production builds.
@@ -104,7 +106,7 @@ For example in your **.babelrc**:
       "plugins": [
         ["transform-compress-graphql", {
           "tagName": "gql",
-          "tagFunction": "String.raw"
+          "tagFunction": ""
         }]
       ]
     }
@@ -117,13 +119,20 @@ The following options are available:
 - `tagName` - `String` with the name of the tag to search for. Defaults
   to `"gql"`.
 - `tagFunction` - `String` with the name of the tag to replace the tag with.
-  Defaults to: `"String.raw"`.
+  Defaults to: `""` which means the tag is simply removed.
 
 ## What about existing variables named `gql`?
 
 When a template literal is found with a tag named `gql` (or with the same name
 as the `tagName` option) the scope is checked for an existing binding of that
-variable and if it exists, the tag is not replaced.
+variable and if it exists, the tag is not replaced with `tagFunction`.
+
+## Compression
+
+The compression is done by the package [`graphql-query-compress`](https://www.npmjs.com/package/graphql-query-compress).
+Any issues related to the compressed query result should be posted as an issue
+in the [issue tracker](https://github.com/rse/graphql-query-compress/issues) of
+that package.
 
 ## License
 

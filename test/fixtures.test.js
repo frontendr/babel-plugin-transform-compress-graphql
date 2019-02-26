@@ -30,18 +30,18 @@ function compareInputWithExpected(fixtureName, pluginOpts = {}) {
 }
 
 describe('Transforming code', () => {
-  it('should replace any `gql` tags with `String.raw`', () => {
+  it('should clear any `gql` tags and compress the query.', () => {
     compareInputWithExpected('basic-example');
   });
-  it('should not replace any `gql` tags which have an existing binding', () => {
+  it('should not replace any `gql` tags which have an existing binding.', () => {
     compareInputWithExpected('existing-binding');
   });
-  it('should replace using a custom tag name', () => {
+  it('should replace using a custom tag name.', () => {
     compareInputWithExpected('overridden-tag-name', {
       tagName: 'my_custom_compress_graphql_tag'
     });
   });
-  it('should replace using a custom tag function', () => {
+  it('should replace using a custom tag function.', () => {
     compareInputWithExpected('overridden-tag-function', {
       tagFunction: 'window.String.raw'
     });
