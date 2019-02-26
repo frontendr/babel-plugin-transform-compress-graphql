@@ -10,8 +10,19 @@ export default function(api) {
         enter: () => {
           changed = [];
         },
-        exit: () => {
-          // log what's changed?
+        exit: (path, state) => {
+          const {verbose = false} = state.opts;
+
+          if (verbose) {
+            const sumCol = i => changed.reduce((s, p) => s + p[i], 0);
+            const count = changed.length;
+            console.info(
+              'Transform compress GraphQL:',
+              `Compressed ${count} ${
+                count === 1 ? 'query' : 'queries'
+              }, saved ${sumCol(0) - sumCol(1)} bytes.`
+            );
+          }
         }
       },
       TaggedTemplateExpression(path, state) {
@@ -22,11 +33,16 @@ export default function(api) {
           if (!path.scope.hasBinding(tagName)) {
             tag.name = tagFunction;
           }
+          const raw = [];
+          const compressed = [];
           quasi.quasis.map(({value}) => {
+            raw.push(value.raw);
             const part = compress(value.raw).trim();
+            compressed.push(part);
             value.raw = part;
             value.cooked = part;
           });
+          changed.push([raw.join('').length, compressed.join('').length]);
         }
       }
     }

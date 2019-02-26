@@ -46,4 +46,9 @@ describe('Transforming code', () => {
       tagFunction: 'window.String.raw'
     });
   });
+  it('should report savings with verbose logging.', () => {
+    compareInputWithExpected('basic-example', {
+      verbose: true
+    });
+  });
 });
