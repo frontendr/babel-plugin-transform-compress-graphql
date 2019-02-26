@@ -23,7 +23,7 @@ export default function(api) {
       },
       TaggedTemplateExpression(path, state) {
         const {tag, quasi} = path.node;
-        const {tagName = 'gql', tagFunction = 'String.raw'} = state.opts;
+        const {tagName = 'gql', tagFunction = ''} = state.opts;
 
         if (tag.name === tagName) {
           if (!path.scope.hasBinding(tagName)) {
