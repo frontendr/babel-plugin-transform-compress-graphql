@@ -19,14 +19,21 @@ export default function(api) {
         const {tagName = 'gql', tagFunction = ''} = state.opts;
 
         if (tag.name === tagName) {
-          if (!path.scope.hasBinding(tagName)) {
-            tag.name = tagFunction;
-          }
           quasi.quasis.map(({value}) => {
             const part = compress(value.raw).trim();
             value.raw = part;
             value.cooked = part;
           });
+          if (!path.scope.hasBinding(tagName)) {
+            if (tagFunction) {
+              // we have an actual tag function, update the name to match it
+              tag.name = tagFunction;
+            } else {
+              // tag function is empty, replace the TaggedTemplateExpression
+              // with the nested TemplateLiteral.
+              path.replaceWith(quasi);
+            }
+          }
         }
       }
     }
