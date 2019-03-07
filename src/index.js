@@ -14,6 +14,11 @@ export default function() {
           // log what's changed?
         }
       },
+      /**
+       * Checks if a TaggedTemplateExpression is tagged with a function named with the tagName setting, 'gql' by default.
+       * If a match is found the contents of the TemplateLiteral is compressed.
+       * If the tag has no existing binding it is replaced with the provided tagFunction or it is removed.
+       */
       TaggedTemplateExpression(path, state) {
         const {tag, quasi} = path.node;
         const {tagName = 'gql', tagFunction = ''} = state.opts;
