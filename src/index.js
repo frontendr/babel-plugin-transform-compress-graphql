@@ -3,6 +3,22 @@ import compress from 'graphql-query-compress';
 
 export default function() {
   let changed = [];
+
+  /**
+   * Apply the `compress` function to the given `TemplateLiteral`.
+   * @param {{quasis: {value: {raw: string, cooked: string}}[], type: string}} literal
+   */
+  function compressTemplateLiteral(literal) {
+    if (literal.type !== 'TemplateLiteral') {
+      return;
+    }
+    literal.quasis.map(({value}) => {
+      const part = compress(value.raw).trim();
+      value.raw = part;
+      value.cooked = part;
+    });
+  }
+
   return {
     name: 'transform-compress-graphql',
     visitor: {
@@ -24,11 +40,9 @@ export default function() {
         const {tagName = 'gql', tagFunction = ''} = state.opts;
 
         if (tag.name === tagName) {
-          quasi.quasis.map(({value}) => {
-            const part = compress(value.raw).trim();
-            value.raw = part;
-            value.cooked = part;
-          });
+          // the quasi property contains the TemplateLiteral
+          compressTemplateLiteral(quasi);
+
           if (!path.scope.hasBinding(tagName)) {
             if (tagFunction) {
               // we have an actual tag function, update the name to match it
