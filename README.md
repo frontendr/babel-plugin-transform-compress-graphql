@@ -24,6 +24,8 @@ The tag name can be customized with an option.
 
 ## Example
 
+### Using the template tag
+
 **In**
 ```js
 const query = gql`
@@ -59,6 +61,25 @@ const query = `people(uuid:"${uuid}"){uuid,fullName,dateOfBirth,nextBirthday,age
 ```
 
 Which saves quite some white space which has no use in production builds.
+
+### Using a comment
+
+Since `1.3.0` it's possible to use a comment to mark a template literals as a GraphQL query.
+
+```js
+const query = /* GraphQL */ `
+  people {
+    fullName,
+    age
+  }
+`;
+```
+
+The value of the comment can be changed using the `comment` option. The match is done
+in a case insensitive manner so `/* graphql */` is also fine.
+
+**Important:** The comment *only* works with template literals. Normal strings will not
+be compressed.
 
 ## Usage
 
@@ -106,7 +127,9 @@ For example in your **.babelrc**:
       "plugins": [
         ["transform-compress-graphql", {
           "tagName": "gql",
-          "tagFunction": ""
+          "tagFunction": "",
+          "comment": "graphql",
+          "removeComments": true
         }]
       ]
     }
@@ -120,6 +143,10 @@ The following options are available:
   to `"gql"`.
 - `tagFunction` - `String` with the name of the tag to replace the tag with.
   Defaults to: `""` which means the tag is simply removed.
+- `removeComments` - `Boolean` when set to `false` will leave any matched comments in
+  place. Defaults to `true`.
+- `comment` - `String` with the case insensitive text matched in any leading comments
+  for a template literal. The entire string is expected. Defaults to `"graphql"`. 
 
 ## What about existing variables named `gql`?
 
