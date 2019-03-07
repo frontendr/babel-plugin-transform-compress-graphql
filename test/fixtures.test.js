@@ -29,7 +29,7 @@ function compareInputWithExpected(fixtureName, pluginOpts = {}) {
   assert.strictEqual(result, expected, true);
 }
 
-describe('Transforming code', () => {
+describe('Triggered by a template tag', () => {
   it('should clear any `gql` tags and compress the query.', () => {
     compareInputWithExpected('basic-example');
   });
@@ -44,6 +44,22 @@ describe('Transforming code', () => {
   it('should replace using a custom tag function.', () => {
     compareInputWithExpected('overridden-tag-function', {
       tagFunction: 'window.String.raw'
+    });
+  });
+});
+
+describe('Triggered by a comment', () => {
+  it('should trigger compression with the default comment.', () => {
+    compareInputWithExpected('trigger-by-comment');
+  });
+  it('should trigger compression with a custom comment.', () => {
+    compareInputWithExpected('trigger-by-custom-comment', {
+      comment: 'MyCustomComment'
+    });
+  });
+  it('should leave the comment in place when configured so.', () => {
+    compareInputWithExpected('leave-comment-in-place', {
+      removeComments: false
     });
   });
 });

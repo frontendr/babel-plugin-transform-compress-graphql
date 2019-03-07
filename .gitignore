@@ -12,3 +12,5 @@
 
 # Jetbrains IDE's
 /.idea
+
+/.coveralls.yml
