@@ -1,7 +1,7 @@
 'use strict';
 import compress from 'graphql-query-compress';
 
-export default function(api) {
+export default function() {
   let changed = [];
   return {
     name: 'transform-compress-graphql',
