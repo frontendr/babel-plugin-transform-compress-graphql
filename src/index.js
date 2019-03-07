@@ -19,6 +19,15 @@ export default function() {
     });
   }
 
+  /**
+   * Trim excess white space and '*' characters from the given comment.
+   * @param {string} comment The given comment.
+   * @returns {string} The trimmed comment.
+   */
+  function trimComment(comment) {
+    return comment.replace(/^[\s*]+/, '').replace(/[\s*]+$/, '');
+  }
+
   return {
     name: 'transform-compress-graphql',
     visitor: {
@@ -53,6 +62,29 @@ export default function() {
               // tag function is empty, replace the TaggedTemplateExpression
               // with the nested TemplateLiteral.
               path.replaceWith(quasi);
+            }
+          }
+        }
+      },
+      /**
+       * Checks if a TemplateLiteral has a leading comment that matches the comment
+       * setting, 'graphql' by default. It does this in a case insensitive way.
+       * If a matching literal with comment is found the literal is compressed.
+       * When not disabled by the setting removeComments, the matched comment is removed.
+       */
+      TemplateLiteral(path, state) {
+        if (path.node.leadingComments) {
+          const {leadingComments = []} = path.node;
+          const commentTrigger = (state.opts.comment || 'graphql').toLowerCase();
+          const commentIndex = leadingComments.findIndex(
+            comment => trimComment(comment.value).toLowerCase() === commentTrigger
+          );
+          if (commentIndex >= 0) {
+            // there is a leading or trailing comment that matches our 'comment' setting
+            compressTemplateLiteral(path.node);
+            // remove the matched comment
+            if (state.opts.removeComments !== false) {
+              path.node.leadingComments.splice(commentIndex, 1);
             }
           }
         }
