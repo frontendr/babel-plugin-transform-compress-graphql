@@ -19,8 +19,8 @@ npm install --save-dev babel-plugin-transform-compress-graphql
 
 ## The problem solved
 
-Compress GraphQL queries by simply tagging them with the `gql` template tag.
-The tag name can be customized with an option.
+Compress GraphQL queries by simply adding a `/* GraphQL */` comment or tagging them with
+the `gql` template tag. The tag name or comment text can be customized with an option.
 
 ## Example
 
