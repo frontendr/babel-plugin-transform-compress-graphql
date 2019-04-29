@@ -7,6 +7,7 @@
 .DS_Store
 
 # (By) products
+.nyc_output
 /lib
 *.log
 
