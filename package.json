@@ -19,11 +19,12 @@
   },
   "scripts": {
     "build": "babel src --out-dir lib",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint . && echo \"eslint: no lint errors\"",
     "prebuild": "rm -rf lib/",
     "prepublishOnly": "npm run build",
     "prettier": "prettier --write ./**/*.js",
-    "test": "eslint . && nyc npm run test:unit && nyc report --reporter=text-lcov | coveralls",
+    "test": "eslint . && nyc npm run test:unit",
     "test:unit": "mocha"
   },
   "version": "1.3.1",
