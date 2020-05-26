@@ -1,6 +1,8 @@
 'use strict';
 import compress from 'graphql-query-compress';
 
+const GRAPHQL_KEY_START = /^[a-z]/i;
+
 export default function() {
   let changed = [];
 
@@ -12,10 +14,12 @@ export default function() {
     if (literal.type !== 'TemplateLiteral') {
       return;
     }
-    literal.quasis.map(({value}) => {
+    literal.quasis.map(({value}, index) => {
       const part = compress(value.raw).trim();
-      value.raw = part;
-      value.cooked = part;
+      // Multiple quasi's should be separated as they contain variables. (#4)
+      const prefix = index > 0 && part.match(GRAPHQL_KEY_START) ? ' ' : '';
+      value.raw = prefix + part;
+      value.cooked = prefix + part;
     });
   }
 

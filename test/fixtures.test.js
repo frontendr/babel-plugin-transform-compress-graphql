@@ -63,3 +63,9 @@ describe('Triggered by a comment', () => {
     });
   });
 });
+
+describe('Compressing a template literal', () => {
+  it('should not break queries when variables are interpolated.', () => {
+    compareInputWithExpected('literal-variables');
+  });
+});
