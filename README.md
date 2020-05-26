@@ -1,7 +1,7 @@
 # babel-plugin-transform-compress-graphql
 
 > Removes unnecessary white space from GraphQL queries using
-[`graphql-query-compress`](https://www.npmjs.com/package/graphql-query-compress).
+> [`graphql-query-compress`](https://www.npmjs.com/package/graphql-query-compress).
 
 [![npm version](https://img.shields.io/npm/v/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
 [![npm downloads](https://img.shields.io/npm/dm/babel-plugin-transform-compress-graphql.svg)](https://www.npmjs.com/package/babel-plugin-transform-compress-graphql)
@@ -27,6 +27,7 @@ the `gql` template tag. The tag name or comment text can be customized with an o
 ### Using the template tag
 
 **In**
+
 ```js
 const query = gql`
   people(uuid:"${uuid}") {
@@ -56,6 +57,7 @@ const query = gql`
 Which is is pretty big literal right?
 
 **Out**
+
 ```js
 const query = `people(uuid:"${uuid}"){uuid,fullName,dateOfBirth,nextBirthday,age,relations{description,type,person{uuid,fullName}}events{uuid,name,description,startDate,startTime,endDate,endTime}}`;
 ```
@@ -78,7 +80,7 @@ const query = /* GraphQL */ `
 The value of the comment can be changed using the `comment` option. The match is done
 in a case insensitive manner so `/* graphql */` is also fine.
 
-**Important:** The comment *only* works with template literals. Normal strings will not
+**Important:** The comment _only_ works with template literals. Normal strings will not
 be compressed.
 
 ## Usage
@@ -106,10 +108,8 @@ babel --plugins transform-compress-graphql script.js
 ### Via Node API
 
 ```js
-require('@babel/core').transform('code', {
-  plugins: [
-    'transform-compress-graphql',
-  ],
+require("@babel/core").transform("code", {
+  plugins: ["transform-compress-graphql"],
 });
 ```
 
@@ -125,12 +125,15 @@ For example in your **.babelrc**:
   "env": {
     "production": {
       "plugins": [
-        ["transform-compress-graphql", {
-          "tagName": "gql",
-          "tagFunction": "",
-          "comment": "graphql",
-          "removeComments": true
-        }]
+        [
+          "transform-compress-graphql",
+          {
+            "tagName": "gql",
+            "tagFunction": "",
+            "comment": "graphql",
+            "removeComments": true
+          }
+        ]
       ]
     }
   }
@@ -146,7 +149,7 @@ The following options are available:
 - `removeComments` - `Boolean` when set to `false` will leave any matched comments in
   place. Defaults to `true`.
 - `comment` - `String` with the case insensitive text matched in any leading comments
-  for a template literal. The entire string is expected. Defaults to `"graphql"`. 
+  for a template literal. The entire string is expected. Defaults to `"graphql"`.
 
 ## What about existing variables named `gql`?
 

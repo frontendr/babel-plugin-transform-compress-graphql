@@ -1,4 +1,4 @@
-const uuid = '12345-abcd-1234-efgh-6789-89';
+const uuid = "12345-abcd-1234-efgh-6789-89";
 
 /**
  * We define our own tagging function named gql. This should result in the
@@ -7,7 +7,7 @@ const uuid = '12345-abcd-1234-efgh-6789-89';
  * @return {string}
  */
 function gql(parts) {
-  return parts.join('');
+  return parts.join("");
 }
 
 const query = gql`
