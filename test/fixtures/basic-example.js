@@ -1,4 +1,4 @@
-const uuid = '12345-abcd-1234-efgh-6789-89';
+const uuid = "12345-abcd-1234-efgh-6789-89";
 
 const query = gql`
   people(uuid:"${uuid}") {

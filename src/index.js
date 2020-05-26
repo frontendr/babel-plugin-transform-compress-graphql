@@ -1,7 +1,9 @@
-'use strict';
-import compress from 'graphql-query-compress';
+"use strict";
+import compress from "graphql-query-compress";
 
-export default function() {
+const GRAPHQL_KEY_START = /^[a-z]/i;
+
+export default function () {
   let changed = [];
 
   /**
@@ -9,13 +11,15 @@ export default function() {
    * @param {{quasis: {value: {raw: string, cooked: string}}[], type: string}} literal
    */
   function compressTemplateLiteral(literal) {
-    if (literal.type !== 'TemplateLiteral') {
+    if (literal.type !== "TemplateLiteral") {
       return;
     }
-    literal.quasis.map(({value}) => {
+    literal.quasis.map(({ value }, index) => {
       const part = compress(value.raw).trim();
-      value.raw = part;
-      value.cooked = part;
+      // Multiple quasi's should be separated as they contain variables. (#4)
+      const prefix = index > 0 && part.match(GRAPHQL_KEY_START) ? " " : "";
+      value.raw = prefix + part;
+      value.cooked = prefix + part;
     });
   }
 
@@ -25,11 +29,11 @@ export default function() {
    * @returns {string} The trimmed comment.
    */
   function trimComment(comment) {
-    return comment.replace(/^[\s*]+/, '').replace(/[\s*]+$/, '');
+    return comment.replace(/^[\s*]+/, "").replace(/[\s*]+$/, "");
   }
 
   return {
-    name: 'transform-compress-graphql',
+    name: "transform-compress-graphql",
     visitor: {
       Program: {
         enter: () => {
@@ -37,7 +41,7 @@ export default function() {
         },
         exit: () => {
           // log what's changed?
-        }
+        },
       },
       /**
        * Checks if a TaggedTemplateExpression is tagged with a function named with the
@@ -47,8 +51,8 @@ export default function() {
        * or it is removed.
        */
       TaggedTemplateExpression(path, state) {
-        const {tag, quasi} = path.node;
-        const {tagName = 'gql', tagFunction = ''} = state.opts;
+        const { tag, quasi } = path.node;
+        const { tagName = "gql", tagFunction = "" } = state.opts;
 
         if (tag.name === tagName) {
           // the quasi property contains the TemplateLiteral
@@ -74,10 +78,10 @@ export default function() {
        */
       TemplateLiteral(path, state) {
         if (path.node.leadingComments) {
-          const {leadingComments = []} = path.node;
-          const commentTrigger = (state.opts.comment || 'graphql').toLowerCase();
+          const { leadingComments = [] } = path.node;
+          const commentTrigger = (state.opts.comment || "graphql").toLowerCase();
           const commentIndex = leadingComments.findIndex(
-            comment => trimComment(comment.value).toLowerCase() === commentTrigger
+            (comment) => trimComment(comment.value).toLowerCase() === commentTrigger
           );
           if (commentIndex >= 0) {
             // there is a leading or trailing comment that matches our 'comment' setting
@@ -88,7 +92,7 @@ export default function() {
             }
           }
         }
-      }
-    }
+      },
+    },
   };
 }
