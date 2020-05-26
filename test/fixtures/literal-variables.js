@@ -11,3 +11,10 @@ const queryWithComma = /* GraphQL */ `{
 const queryWithTrailingVariable = /* GraphQL */ `{
   a(b: ${ONE} c: ${TWO})
 }`;
+
+const queryWithNewlines = /* GraphQL */ `{
+  a(
+    b: ${ONE}
+    c: true
+  )
+}`;
