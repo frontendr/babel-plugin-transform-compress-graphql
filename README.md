@@ -54,7 +54,7 @@ const query = gql`
   }`;
 ```
 
-Which is is pretty big literal right?
+Which is pretty big literal right?
 
 **Out**
 
@@ -77,8 +77,8 @@ const query = /* GraphQL */ `
 `;
 ```
 
-The value of the comment can be changed using the `comment` option. The match is done
-in a case insensitive manner so `/* graphql */` is also fine.
+The value of the comment can be changed using the `comment` option. The comment is being
+matched in a case-insensitive manner so `/* graphql */` is also fine.
 
 **Important:** The comment _only_ works with template literals. Normal strings will not
 be compressed.
@@ -145,24 +145,23 @@ The following options are available:
 - `tagName` - `String` with the name of the tag to search for. Defaults
   to `"gql"`.
 - `tagFunction` - `String` with the name of the tag to replace the tag with.
-  Defaults to: `""` which means the tag is simply removed.
+  Defaults to: `""` which means the tag will be removed from the output.
 - `removeComments` - `Boolean` when set to `false` will leave any matched comments in
   place. Defaults to `true`.
-- `comment` - `String` with the case insensitive text matched in any leading comments
-  for a template literal. The entire string is expected. Defaults to `"graphql"`.
+- `comment` - `String` with the case-insensitive text matched in any leading comments
+  for a template literal. The entire string will be expected. Defaults to `"graphql"`.
 
 ## What about existing variables named `gql`?
 
-When a template literal is found with a tag named `gql` (or with the same name
-as the `tagName` option) the scope is checked for an existing binding of that
-variable and if it exists, the tag is not replaced with `tagFunction`.
+For template literals with a tag named `gql` (or with the same name as the `tagName`
+option) the scope will be checked for an existing binding of that variable and will not
+be replaced with `tagFunction` if it exists.
 
 ## Compression
 
-The compression is done by the package [`graphql-query-compress`](https://www.npmjs.com/package/graphql-query-compress).
-Any issues related to the compressed query result should be posted as an issue
-in the [issue tracker](https://github.com/rse/graphql-query-compress/issues) of
-that package.
+GraphQL literals will be compressed with [`graphql-query-compress`](https://www.npmjs.com/package/graphql-query-compress).
+Any issues related to the compressed query result should be posted as an issue in the
+[issue tracker](https://github.com/rse/graphql-query-compress/issues) of that package.
 
 ## License
 
