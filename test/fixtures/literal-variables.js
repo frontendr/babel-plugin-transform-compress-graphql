@@ -11,3 +11,20 @@ const queryWithComma = /* GraphQL */ `{
 const queryWithTrailingVariable = /* GraphQL */ `{
   a(b: ${ONE} c: ${TWO})
 }`;
+
+const queryWithNewlines = /* GraphQL */ `{
+  a(
+    b: ${ONE}
+    c: true
+  )
+}`;
+
+const NAME = "name";
+const TYPE = "type";
+const SPACE = " ";
+
+const queryWithFragment = /* GraphQL */ `fragment ${SPACE} ${NAME} on ${TYPE} {
+  id
+  name
+}
+`;
