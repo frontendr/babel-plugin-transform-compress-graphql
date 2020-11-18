@@ -1,7 +1,8 @@
 "use strict";
 import compress from "graphql-query-compress";
 
-const GRAPHQL_KEY_START = /^[a-z]/i;
+const GRAPHQL_TOKEN_START = /^[a-z]/i;
+const GRAPHQL_TOKEN_END = /[a-z0-9]$/i;
 const DEFAULT_COMMENT = "graphql";
 
 export default function () {
@@ -73,12 +74,15 @@ export default function () {
    * @param {{quasis: {value: {raw: string, cooked: string}}[], type: string}} node
    */
   function compressTemplateLiteral(node) {
-    node.quasis.map(({ value }, index) => {
+    node.quasis.forEach(({ value, tail }, index) => {
       const part = compress(value.raw).trim();
-      const prefix = index > 0 && part.match(GRAPHQL_KEY_START) ? " " : "";
-      // Multiple quasi's should be separated as they contain variables. (#4)
-      value.raw = prefix + part;
-      value.cooked = prefix + part;
+      // Multiple quasi's should be separated as they have variables next to them. (#4, #5)
+      const prefix =
+        index > 0 && (GRAPHQL_TOKEN_START.test(part) || part === "") ? " " : "";
+      const postfix = !tail && GRAPHQL_TOKEN_END.test(part) ? " " : "";
+      const compressed = prefix + part + postfix;
+      value.raw = compressed;
+      value.cooked = compressed;
     });
   }
 

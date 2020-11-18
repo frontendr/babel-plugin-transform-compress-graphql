@@ -18,3 +18,13 @@ const queryWithNewlines = /* GraphQL */ `{
     c: true
   )
 }`;
+
+const NAME = "name";
+const TYPE = "type";
+const SPACE = " ";
+
+const queryWithFragment = /* GraphQL */ `fragment ${SPACE} ${NAME} on ${TYPE} {
+  id
+  name
+}
+`;
