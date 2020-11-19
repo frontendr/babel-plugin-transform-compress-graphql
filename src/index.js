@@ -3,6 +3,7 @@ import compress from "graphql-query-compress";
 
 const GRAPHQL_TOKEN_START = /^[a-z]/i;
 const GRAPHQL_TOKEN_END = /[a-z0-9]$/i;
+const DEFAULT_TAG = "gql";
 const DEFAULT_COMMENT = "graphql";
 
 export default function () {
@@ -15,7 +16,7 @@ export default function () {
    */
   function compressTaggedTemplateExpression(path, state) {
     const { tag, quasi } = path.node;
-    const { tagName = "gql", tagFunction } = state.opts;
+    const { tagName = DEFAULT_TAG, tagFunction } = state.opts;
 
     if (tag.name === tagName) {
       // the quasi property contains the TemplateLiteral

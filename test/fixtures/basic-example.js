@@ -23,3 +23,5 @@ const query = gql`
       endDate, endTime
     }
   }`;
+
+const notAQuery = noQGL`  this is not a GraphQL query and should be left alone  `;
